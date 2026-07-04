@@ -555,7 +555,7 @@ input, textarea, select {
     content: '';
     position: absolute;
     inset: -10%;
-    background: url('/asset/payatimbg.jpg') center / cover no-repeat;
+    background: src ('/asset/payatimbg.jpg') center / cover no-repeat;
     animation: kenBurns 36s ease-in-out infinite alternate;
     z-index: 0;
     will-change: transform;
