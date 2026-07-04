@@ -539,7 +539,7 @@ input, textarea, select {
    14. HERO SECTION  — Ken Burns + Cinematic Film-Open Entrance
    --------------------------------------------------------------- */
 #hero {
-    min-height: clamp(210px, 40vh, 310px); /* halved from 420–620 */
+    min-height: clamp(210px, 27.5vh, 310px); /* halved from 420 / 55vh / 620 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -549,19 +549,20 @@ input, textarea, select {
     overflow: hidden;
     animation: filmOpen 1.6s cubic-bezier(0.17, 0.84, 0.44, 1) both;
 }
-
-/* Ken Burns layer — background image zooms/pans slowly */
-#hero::before {
-    content: '';
+.hero-bg-img {
     position: absolute;
     inset: -10%;
-    background: url('/asset/payatimbg.jpg') center / cover no-repeat;
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    object-position: center;
     animation: kenBurns 36s ease-in-out infinite alternate;
     z-index: 0;
     will-change: transform;
+    pointer-events: none;
+    user-select: none;
 }
 
-/* Cinematic gradient overlay + grain */
 #hero::after {
     content: '';
     position: absolute;
@@ -573,38 +574,19 @@ input, textarea, select {
             rgba(11, 58, 28, 0.60) 42%,
             rgba(0, 0, 0, 0.82)    100%
         ),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     z-index: 1;
     pointer-events: none;
 }
 
-/* Light-beam sweep across hero — pure CSS cinematic */
-#hero .hero-content::before {
-    content: '';
-    position: absolute;
-    top: -120%; left: -80%;
-    width: 60%; height: 200;
-    background: linear-gradient(
-        105deg,
-        transparent 0%,
-        rgba(255, 200, 50, 0.07) 45%,
-        rgba(255, 255, 255, 0.06) 50%,
-        transparent 55%
-    );
-    transform: skewX(-12deg);
-    animation: lightBeam 9s ease-in-out 2s infinite;
-    pointer-events: none;
-    z-index: 0;
-}
-
 .hero-content {
     max-width: 860px;
-    padding: 28px 40px; /* halved vertical padding from 56px */
+    padding: 28px 40px; /* vertical padding halved (56px → 28px), horizontal kept */
     position: relative;
     z-index: 2;
 }
 
-/* Staggered entrance animations */
+
 .hero-content h2 {
     font-size: clamp(2.0rem, 5.5vw, 3.4rem);
     font-weight: 800;
@@ -630,8 +612,31 @@ input, textarea, select {
 .hero-content .hero-btns {
     opacity: 0;
     animation: cinematicText 1.0s 1.05s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
 }
 
+.btn-donate {
+    background: #f4b41a;
+    color: #1a1a1a;
+    padding: 14px 28px;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.btn-learn {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: 14px 28px;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
 /* ---------------------------------------------------------------
    15. STATS BAR
    --------------------------------------------------------------- */
